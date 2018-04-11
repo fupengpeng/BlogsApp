@@ -1,0 +1,54 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 26
+    buildToolsVersion "26.0.3"
+    defaultConfig {
+        applicationId "club.zhisimina.blogsapp"
+        minSdkVersion 24
+        targetSdkVersion 26
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions{
+        checkReleaseBuilds false
+        abortOnError false
+        disable 'MissingTranslation'
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    /*-------------------- butterknife开始 --------------------*/
+    /*-------------------- butterknife结束 --------------------*/
+    compile 'com.android.support:appcompat-v7:26.+'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.jakewharton:butterknife:8.6.0'
+    compile 'com.android.support:design:26.+'
+    testCompile 'junit:junit:4.12'
+    apt 'com.jakewharton:butterknife-compiler:8.6.0'
+    compile files('libs/fastjson-1.1.57.android.jar')
+    compile files('libs/glide-3.6.1.jar')
+    compile 'org.greenrobot:eventbus:3.0.0'
+    apt 'org.greenrobot:eventbus-annotation-processor:3.0.1'
+    compile project(path: ':lib-zxing')
+    compile 'com.yanzhenjie.nohttp:nohttp:1.1.2'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+}
+apt {
+    arguments {
+        eventBusIndex "com.whoislcj.eventbus.MyEventBusIndex"
+    }
+}
+
